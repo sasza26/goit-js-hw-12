@@ -3,7 +3,7 @@ import axios from 'axios';
 export const returnPromise = (q, page) => {
   return axios.get('https://pixabay.com/api/', {
     params: {
-      key: '43795533-00e69c3734dde476e8d836fd2',
+      key: '45476779-a37d3eb685934422065bcfa30',
       q,
       orientation: 'horizontal',
       safesearch: true,
