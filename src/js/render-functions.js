@@ -1,40 +1,36 @@
-export const returnMarkup = arrSearchPhotos => {
-  const markup = arrSearchPhotos
-    .map(
-      ({
-        webformatURL,
-        largeImageURL,
-        tags,
-        likes,
-        views,
-        comments,
-        downloads,
-      }) => {
-        return `<li class="search-list-item">
-                    <a class="gallery-link" href="${largeImageURL}">
-                      <img class="search-list-img" src="${webformatURL}" alt="${tags}" />
-                    </a>
-                    <ul>
-                      <li>
-                        <h3>Likes</h3>
-                        <p>${likes}</p>
-                      </li>
-                      <li>
-                        <h3>Views</h3>
-                        <p>${views}</p>
-                      </li>
-                      <li>
-                        <h3>Comments</h3>
-                        <p>${comments}</p>
-                      </li>
-                      <li>
-                        <h3>Downloads</h3>
-                        <p>${downloads}</p>
-                      </li>
-                    </ul>
-                  </li>`;
-      }
-    )
-    .join('');
-  return markup;
-};
+const ulEl = document.querySelector('.gallery');
+
+function imgTemplate({
+  webformatURL,
+  largeImageURL,
+  tags,
+  likes,
+  views,
+  comments,
+  downloads,
+}) {
+  return `<li class="gallery-item> 
+    <figure class="sign">
+        <a href="${largeImageURL}"><img class="list-img" src="${webformatURL}" alt="${tags}" title="" width="360" height="200"/></a><span class="title-img">
+        <figcaption class="title-img"><ul class="figcaption">
+      <li class="figcaption-item">Likes<p class="counter">${likes}</p></li>
+      <li class="figcaption-item">Views<p class="counter">${views}</p></li>
+      <li class="figcaption-item">Comments<p class="counter">${comments}</p></li>
+      <li class="figcaption-item">Downloads<p class="counter">${downloads}</p></li>
+    </ul></figcaption>
+    </figure>
+   </li>`;
+}
+
+function imagesTemplate(arr) {
+  return arr.map(imgTemplate).join('');
+}
+
+export function innerImg(hits) {
+  const markup = imagesTemplate(hits);
+  ulEl.innerHTML = markup;
+}
+export function insertImg(hits) {
+  const markup = imagesTemplate(hits);
+  ulEl.insertAdjacentHTML('beforeend', markup);
+}
