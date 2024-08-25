@@ -1,22 +1,19 @@
 import axios from 'axios';
-const baseUrl = 'https://pixabay.com/api/';
 
-export async function searchImages(value, page = 1, limitPage) {
-  try {
-    const response = await axios.get(baseUrl, {
-      params: {
-        key: '45476779 - a37d3eb685934422065bcfa30',
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: true,
-        q: value,
-        page,
-        per_page: 15,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error('Fetch error: ', error);
-  }
+export async function getImage(value, currentPage) {
+  const KEY = '45476779-a37d3eb685934422065bcfa30';
+  const url = 'https://pixabay.com/api/';
+
+  const params = {
+    key: KEY,
+    q: value,
+    image_type: 'photo',
+    orientation: 'horizontal',
+    page: currentPage,
+    per_page: 14,
+    safesearch: true,
+  };
+
+  const res = await axios.get(url, { params });
+  return res.data;
 }
-
